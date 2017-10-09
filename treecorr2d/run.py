@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+
 # Make sure this file is executable.
 import descpipe
 
@@ -25,8 +26,8 @@ class Stage(descpipe.Stage):
         import treecorr
 
         config_file = self.get_config_path("config")
-        input_file = self.get_input_path("shear_catalog")
-        output_file = self.get_output_path("correlation_functions")
+        input_file = self.get_input_path("shear_catalog.fits")
+        output_file = self.get_output_path("correlation_functions.txt")
 
         config = treecorr.read_config(config_file)
         config['file_name'] = input_file

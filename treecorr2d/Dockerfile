@@ -10,6 +10,7 @@ USER root
 RUN yum install -y libffi-devel
 
 # Commands that need the DM stack set up first require bash -lc "command"
+# The python we use comes from the DM stack so we require that.
 RUN bash -lc "pip install TreeCorr"
 
 # Must always end with these.
