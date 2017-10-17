@@ -12,13 +12,19 @@ class Stage(descpipe.Stage):
         "config": "config.yaml"
     }
 
+    #Tags and types?
+    #Tags and schemas?
     inputs = {
-        "shear_catalog.fits": "catalog.fits",
+        "shear-catalog": "fits",
     }
 
     outputs = {
-        "correlation_functions.txt": "correlation-functions.txt",
+        "correlation-functions": "txt",
+        #"some-catalog": "hdf",
+        #"some-metadata": float,
+        #other stuff like this?
     }
+
 
 
     def run(self):
@@ -26,8 +32,10 @@ class Stage(descpipe.Stage):
         import treecorr
 
         config_file = self.get_config_path("config")
-        input_file = self.get_input_path("shear_catalog.fits")
-        output_file = self.get_output_path("correlation_functions.txt")
+        input_file = self.get_input_path("shear-catalog")
+        output_file = self.get_output_path("correlation-functions")
+        print(config_file)
+        print(input_file)
 
         config = treecorr.read_config(config_file)
         config['file_name'] = input_file

@@ -1,4 +1,4 @@
-STAGES=treecorr2d
+STAGES=treecorr  tomography pz_stack 
 
 OWNER=joezuntz
 BASENAME=desc-pipe
@@ -7,9 +7,11 @@ VERSION=1.0
 
 LOGS := $(STAGES:%=build/%.log) build/base.log
 
-.DEFAULT_GOAL := $(STAGES)
+.DEFAULT_GOAL := all
 
-.PHONY: base $(STAGES) clean
+all: $(STAGES)
+
+.PHONY: base $(STAGES) clean all
 
 base: build/base.log
 
@@ -18,11 +20,8 @@ $(STAGES): % :  build/%.log
 build/base.log: base/Dockerfile
 	docker build -t ${OWNER}/${BASENAME}-base:${VERSION} ./base 2>&1 | tee $@
 
-build/%.log :  %/Dockerfile %/run.py build/base.log
-	rm -rf $*/descpipe
-	cp -r /Users/jaz/src/desc-docker-pipeline/descpipe $*/descpipe
+build/%.log :  %/* build/base.log
 	docker build -t ${OWNER}/${BASENAME}-$*:${VERSION} ./$* 2>&1 | tee $@
-	rm -rf $*/descpipe
 
 clean:
 	rm -f $(LOGS)

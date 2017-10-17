@@ -1,4 +1,3 @@
-images/build/*.log
-
+build/*.log
 *__pycache__
 *.pyc

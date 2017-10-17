@@ -12,7 +12,8 @@ ADD dot-bashprofile /root/.bash_profile
 ADD dot-bashrc /root/.bashrc
 
 # Two versions one with stack one without?
-RUN bash -lc "cd /opt/desc/ && wget https://github.com/joezuntz/descpipe/archive/0.1.0.tar.gz && tar -zxvf 0.1.0.tar.gz && rm 0.1.0.tar.gz && cd descpipe-0.1.0/ && python3 setup.py install && rm -rf /opt/desc/descpipe"
+RUN bash -lc "cd /opt/desc/ && wget https://github.com/joezuntz/descpipe/archive/0.1.1.tar.gz && tar -zxvf 0.1.1.tar.gz && rm 0.1.1.tar.gz && cd descpipe-0.1.1/ && python3 setup.py install && rm -rf /opt/desc/descpipe"
+RUN bash -lc "pip install py-dag==3.0.0"
 RUN echo http_caching=packages >> /etc/yum.conf
 RUN yum clean all
 
