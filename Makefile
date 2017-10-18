@@ -1,6 +1,4 @@
 STAGES=treecorr  tomography pz_stack 
-
-
 OWNER=joezuntz
 BASENAME=desc-pipe
 VERSION=1.0
@@ -8,13 +6,21 @@ VERSION=1.0
 
 
 LOGS := $(STAGES:%=build/%.log) build/base.log
-PUSHES := $(STAGES:%=push-%)
+PUSHES := $(STAGES:%=build/.push-%)
+PULLS := $(STAGES:%=pull-%)
+
+# Decide how to pull
+ifdef NERSC_HOST
+	PULLCMD=shifterimg pull docker:
+else
+	PULLCMD=docker pull 
+endif
 
 .DEFAULT_GOAL := all
 
 all: $(STAGES)
 
-.PHONY: base $(STAGES) clean all push
+.PHONY: base $(STAGES) clean all push $(PULLS) pull
 
 base: build/base.log
 
@@ -28,8 +34,14 @@ build/%.log :  %/* build/base.log
 
 push:  $(PUSHES)
 
-push-%:
+pull: $(PULLS)
+
+$(PUSHES): build/.push-%: build/%.log
 	docker push ${OWNER}/${BASENAME}-$*:${VERSION}
+	touch build/.push-$*
+
+$(PULLS): pull-%:
+	$(PULLCMD)${OWNER}/${BASENAME}-$*:${VERSION}
 
 clean:
 	rm -f $(LOGS)
