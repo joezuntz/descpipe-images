@@ -27,3 +27,9 @@ ENV DESC_OUTPUT=/opt/output
 ENV DESC_CONFIG=/opt/config
 ENV PYTHONPATH="/opt/desc:${PYTHONPATH}"
 
+
+# This is needed to work on NERSC.
+ENV USER vagrant
+ENV HOME /home/vagrant
+
+
