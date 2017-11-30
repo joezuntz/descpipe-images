@@ -20,3 +20,4 @@ RUN bash -lc "pip install twopoint"
 # particular file is here.
 USER vagrant
 COPY run.py /opt/desc/run.py
+COPY treecorr_wrapper.py /opt/desc/treecorr_wrapper.py

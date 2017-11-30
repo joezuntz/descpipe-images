@@ -59,5 +59,5 @@ def main(config_file, tomo_file, cat_file, output_file):
             ("source", "source"), "SAMPLE", angbin, xim, angle=theta, angle_unit="arcmin")
 
         output = twopoint.TwoPointFile([XIP, XIM], [], [], None)
-        output.to_fits(output_file)
+        output.to_fits(output_file, clobber=True)
 
