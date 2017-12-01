@@ -7,17 +7,17 @@ MAINTAINER joezuntz@googlemail.com
 USER root
 
 # Install dependencies
-RUN yum install -y libffi-devel
+RUN apt-get install -y libffi-dev && apt-get clean
 
 # Commands that need the DM stack set up first require bash -lc "command"
 # The python we use comes from the DM stack so we require that.
-RUN bash -lc "pip install TreeCorr"
-RUN bash -lc "pip install twopoint"
+RUN pip3 install TreeCorr
+RUN pip3 install twopoint
+
+COPY treecorr_wrapper.py /opt/desc/treecorr_wrapper.py
 
 # Must always end with these.
 # In the base image we told docker that the default command to run 
-# should always be "bash -lc /opt/desc/run.py".  We replace what that
+# should always be "/opt/desc/run.py".  We replace what that
 # particular file is here.
 USER vagrant
-COPY run.py /opt/desc/run.py
-COPY treecorr_wrapper.py /opt/desc/treecorr_wrapper.py
