@@ -16,6 +16,7 @@ RUN bash -lc "cd /opt/desc/ && wget https://github.com/joezuntz/descpipe/archive
 RUN bash -lc "pip install py-dag==3.0.0"
 RUN echo http_caching=packages >> /etc/yum.conf
 RUN yum clean all
+RUN chmod ugo+rwx /opt
 
 USER vagrant
 ADD dot-bashprofile /home/vagrant/.bash_profile
@@ -26,6 +27,7 @@ ENV DESC_INPUT=/opt/input
 ENV DESC_OUTPUT=/opt/output
 ENV DESC_CONFIG=/opt/config
 ENV PYTHONPATH="/opt/desc:${PYTHONPATH}"
+
 
 
 # This is needed to work on NERSC.

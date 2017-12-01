@@ -4,3 +4,4 @@ RUN bash -lc "pip install fitsio"
 USER vagrant
 COPY tomography.py /opt/desc/
 COPY run.py /opt/desc/run.py
+COPY cwl-run.sh /opt/desc/cwl-run.sh
