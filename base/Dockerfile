@@ -19,6 +19,14 @@ COPY descpipe-1.2.tar.gz /home/root/
 RUN pip3 install /home/root/descpipe-1.2.tar.gz && rm /home/root/descpipe-1.2.tar.gz
 ENV PYTHONPATH="/opt/desc:${PYTHONPATH}"
 
+
+ENV DESC_CONFIG /opt/config
+ENV DESC_INPUT /opt/input
+ENV DESC_OUTPUT /opt/output
+
+COPY cwl-run.sh /opt/desc/cwl-run.sh
+
+RUN chmod ugo+w /opt /opt/desc
 # This is needed to work on NERSC.
 #ENV USER vagrant
 #ENV HOME /home/vagrant
