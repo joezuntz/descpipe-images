@@ -1,7 +1,9 @@
-# This is the base we are building off, and is described in 
-# the "base" directory.
-FROM joezuntz/desc-pipe-base:1.0
-MAINTAINER joezuntz@googlemail.com
+# The first of these variables must be set when building.
+# The second can be, but takes the default value 1.0
+ARG user
+ARG base=1.0
+# This is the base image that we start from for this case.
+FROM ${user}/desc-pipe-base:${base}
 
 # Before all these things happen the command "ONBUILD" that we ran in the 
 # base image will trigger this build to add a file called "run.py to "/opt/desc/".

@@ -33,10 +33,10 @@ build/base.log: base/Dockerfile  base/cwl-run.sh
 	docker build -t ${OWNER}/${BASENAME}-base:${VERSION} ./base 2>&1 | tee $@
 
 build/base-dm.log: base/Dockerfile
-	docker build -t ${OWNER}/${BASENAME}-base-dm:${VERSION} ./base 2>&1 | tee $@
+	docker build -t ${OWNER}/${BASENAME}-base-dm:${VERSION} --build-arg user=${OWNER} --build-arg base= ./base 2>&1 | tee $@
 
 build/%.log :  %/* build/base.log
-	docker build -t ${OWNER}/${BASENAME}-$*:${VERSION} ./$* 2>&1 | tee $@
+	docker build -t  ${OWNER}/${BASENAME}-$*:${VERSION}  ./$* --build-arg user=${OWNER} 2>&1 | tee $@
 
 push:  $(PUSHES)
 

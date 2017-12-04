@@ -3,7 +3,6 @@
 # This base does not include the DM stack.
 # So it will need more dependencies installing.
 FROM ubuntu:xenial
-MAINTAINER joezuntz@googlemail.com
 
 USER root
 RUN mkdir /opt/desc
