@@ -29,8 +29,7 @@ base-dm: build/base-dm.log
 $(STAGES): % :  build/%.log
 $(DM_STAGES): % :  build/%.log
 
-build/base.log: base/Dockerfile ../dist/descpipe-1.2.tar.gz base/cwl-run.sh 
-	cp ../dist/descpipe-1.2.tar.gz base/
+build/base.log: base/Dockerfile  base/cwl-run.sh 
 	docker build -t ${OWNER}/${BASENAME}-base:${VERSION} ./base 2>&1 | tee $@
 
 build/base-dm.log: base/Dockerfile

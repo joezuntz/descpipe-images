@@ -15,8 +15,7 @@ RUN apt-get update && apt-get install -y gcc python3 python3-pip && apt-get clea
 RUN pip3 install --upgrade pip
 RUN pip3 install numpy py-dag==3.0.0 
 RUN pip3 install fitsio
-COPY descpipe-1.2.tar.gz /home/root/
-RUN pip3 install /home/root/descpipe-1.2.tar.gz && rm /home/root/descpipe-1.2.tar.gz
+RUN pip3 install descpipe==1.3
 ENV PYTHONPATH="/opt/desc:${PYTHONPATH}"
 
 
