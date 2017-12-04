@@ -3,21 +3,21 @@
 FROM joezuntz/desc-pipe-base:1.0
 MAINTAINER joezuntz@googlemail.com
 
-# Enable root mode, so we can install things more easily
-USER root
+# Before all these things happen the command "ONBUILD" that we ran in the 
+# base image will trigger this build to add a file called "run.py to "/opt/desc/".
+
 
 # Install dependencies
 RUN apt-get install -y libffi-dev && apt-get clean
 
-# Commands that need the DM stack set up first require bash -lc "command"
-# The python we use comes from the DM stack so we require that.
+# Install python dependencies
 RUN pip3 install TreeCorr
 RUN pip3 install twopoint
 
+# Install a file with code for this module.
 COPY treecorr_wrapper.py /opt/desc/treecorr_wrapper.py
 
 # Must always end with these.
-# In the base image we told docker that the default command to run 
-# should always be "/opt/desc/run.py".  We replace what that
-# particular file is here.
 USER vagrant
+
+
